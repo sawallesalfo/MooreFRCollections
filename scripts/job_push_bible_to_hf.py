@@ -91,4 +91,7 @@ french_dataset = process_dataset(directory_french, "french_")
 
 # Merge
 datasets = merge_datasets(moore_dataset, french_dataset, "moore_verse_id", "french_verse_id")
-datasets.push_to_hub("MooreFRCollections_BibleOnlyText", commit_message=f"🚀 add moore with transcripts + metadata")
+
+# push to huginface
+datasets_hf = Dataset.from_pandas(datasets)
+datasets_hf.push_to_hub("MooreFRCollections_BibleOnlyText", commit_message=f"🚀 add moore with transcripts + metadata")
