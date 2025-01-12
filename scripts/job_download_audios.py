@@ -8,7 +8,7 @@ from pathlib import Path
 
 encoded_key = quote("Yel-bũnã/page_28.mp3")
 
-# Configuration - downloads audios
+# Configuration - download audios
 start_url = "https://www.jw.org/mos/d-s%E1%BA%BDn-yiisi/biible/nwt/books/S%C9%A9ngre/1"
 output_dir = "audio_files"
 max_file_size = 2
