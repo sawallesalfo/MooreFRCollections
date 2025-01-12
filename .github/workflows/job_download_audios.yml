@@ -3,11 +3,11 @@ name: Scripts jobs audio downloading
 on:
   push:
     branches:
-      - master                    # Only run on push to the master branch
+      - master
   pull_request:
     branches:
-      - master                    # Only run on pull requests to the master branch
-  workflow_dispatch:              # Allows manual triggering of the workflow
+      - master
+  #workflow_dispatch:
 
 env:
   IMAGE_NAME: ${{ secrets.DOCKER_USERNAME }}/moorecollection
@@ -22,17 +22,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Debug Docker Image Name
+        run: echo "Docker image: ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}"
+
       - name: Log in to Docker Hub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
-      - name: Pull Docker image
+      - name: Pull Docker Image
         run: docker pull ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
 
-      - name: Ensure Directory Permissions
-        run: docker run --rm -v ${{ github.workspace }}:/app -w /app ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} /bin/bash -c "
-          mkdir -p /app/scripts/audio_files && chmod 777 /app/scripts/audio_files && ls -ld /app/scripts/audio_files"
-
-      - name: Run Python script inside Docker
+      - name: Run Python Script Inside Docker
         run: docker run --rm \
               -v ${{ github.workspace }}:/app \
               -w /app \
