@@ -105,7 +105,7 @@ def main():
             logger.info(f"Completed processing for {s3_key}")
 
         except:
-            logger.warning(f"processing of {s3_key} failed"")
+            logger.warning(f"processing of {s3_key} failed")
 
 if __name__ == "__main__":
     main()
