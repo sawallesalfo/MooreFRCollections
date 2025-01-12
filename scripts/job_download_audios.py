@@ -5,7 +5,6 @@ from pathlib import Path
 
 from jwsoup.audio.scraper import download_audios
 
-
 # Configuration - download audios
 start_url = "https://www.jw.org/mos/d-s%E1%BA%BDn-yiisi/biible/nwt/books/S%C9%A9ngre/1"
 output_dir = "audio_files"

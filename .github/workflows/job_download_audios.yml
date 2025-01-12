@@ -3,12 +3,12 @@ name: Scripts jobs audio downloading
 on:
   push:
     paths:
-      - scripts/job_download_audios.py"
+      - scripts/job_download_audios.py
     branches:
       - master                    # Only run on push to the master branch
   pull_request:
     paths:
-      - scripts/job_download_audios.py"
+      - scripts/job_download_audios.py
     branches:
       - master                    # Only run on pull requests to the master branch
   workflow_dispatch:              # Allows manual triggering of the workflow
