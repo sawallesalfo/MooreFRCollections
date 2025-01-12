@@ -7,17 +7,12 @@ on:
   pull_request:
     branches:
       - master                    # Only run on pull requests to the master branch
-  #workflow_dispatch:            # Allows manual triggering of the workflow
+  workflow_dispatch:              # Allows manual triggering of the workflow
 
 env:
   IMAGE_NAME: ${{ secrets.DOCKER_USERNAME }}/moorecollection
   IMAGE_TAG: latest
   PYTHONPATH: ${{ github.workspace }}
-  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-  AWS_ENDPOINT_URL_S3: ${{ secrets.AWS_ENDPOINT_URL_S3 }}
-  AWS_REGION: ${{ secrets.AWS_REGION }}
-
 
 jobs:
   run-jobs:
@@ -38,5 +33,12 @@ jobs:
           mkdir -p /app/scripts/audio_files && chmod 777 /app/scripts/audio_files && ls -ld /app/scripts/audio_files"
 
       - name: Run Python script inside Docker
-        run: docker run --rm -v ${{ github.workspace }}:/app -w /app ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} /bin/bash -c "
-          python /app/scripts/job_download_audios.py"
+        run: docker run --rm \
+              -v ${{ github.workspace }}:/app \
+              -w /app \
+              --env AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} \
+              --env AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} \
+              --env AWS_ENDPOINT_URL_S3=${{ secrets.AWS_ENDPOINT_URL_S3 }} \
+              --env AWS_REGION=${{ secrets.AWS_REGION }} \
+              ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} /bin/bash -c "
+                python /app/scripts/job_download_audios.py"
