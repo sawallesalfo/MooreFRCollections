@@ -22,8 +22,6 @@ access_key = os.getenv('AWS_ACCESS_KEY_ID')
 secret_key = os.getenv('AWS_SECRET_ACCESS_KEY')
 endpoint_url = os.getenv('AWS_ENDPOINT_URL_S3')
 
-print("aaaaaaaaaaa", region)
-
 # Initialisation  S3
 s3_client = boto3.client(
     's3',
