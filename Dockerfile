@@ -11,8 +11,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 RUN apt-get update && apt-get install -y sudo
 
 
-COPY bi_dashboard ./bi_dashboard
-
-RUN pip install --no-cache-dir -e ./bi_dashboard
-
 
