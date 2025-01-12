@@ -70,7 +70,6 @@ def list_s3_files(bucket_name, prefix):
             files.append(obj['Key'])
     return files
 
-
 def main():
     
     # Configuration
