@@ -6,7 +6,7 @@ from jwsoup.audio.scraper import download_audios
 # Configuration to downloads audios
 start_url = "https://www.jw.org/mos/d-s%E1%BA%BDn-yiisi/biible/nwt/books/Yel-b%C5%A9n%C3%A3/28"
 output_dir = "audio_files"
-max_file_size = 5
+max_file_size = 2
 
 logger.info("Downloading audios...")
 download_audios(start_url, output_dir, max_file_size)
@@ -17,6 +17,8 @@ access_key = os.getenv('AWS_ACCESS_KEY_ID')
 secret_key = os.getenv('AWS_SECRET_ACCESS_KEY')
 endpoint_url = os.getenv('AWS_ENDPOINT_URL_S3')
 region = os.getenv('AWS_REGION')
+
+print("aaaaaaaaaaa", region)
 
 # Initialisation  S3
 s3_client = boto3.client(
@@ -39,6 +41,6 @@ def upload_folder_to_s3(folder_path, bucket_name, s3_prefix):
             s3_client.upload_file(local_path, bucket_name, s3_key)
             logger.info(f"Uploaded {local_path} to s3://{bucket_name}/{s3_key}")
 
-logger.info(f"Uploading folder {output_dir} to MinIO...")
+logger.info(f"Uploading folder {output_dir} to S3...")
 upload_folder_to_s3(output_dir, bucket_name, s3_prefix)
 logger.info("Upload complete!")
