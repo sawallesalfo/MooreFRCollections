@@ -42,6 +42,8 @@ def upload_folder_to_s3(folder_path, bucket_name, s3_prefix):
             local_path = quote(os.path.join(root, file))
             relative_path = os.path.relpath(local_path, folder_path)
             s3_key = os.path.join(s3_prefix, relative_path)
+            print("zzzzzzzzzzzz")
+            print(s3_key, relative_path, local_path)
             s3_client.upload_file(local_path, bucket_name, s3_key)
             logger.info(f"Uploaded {local_path} to s3://{bucket_name}/{s3_key}")
 
