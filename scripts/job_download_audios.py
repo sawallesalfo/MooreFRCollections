@@ -1,7 +1,11 @@
 import os
 import boto3
 from loguru import logger
+from urllib.parse import quote
+
 from jwsoup.audio.scraper import download_audios
+
+encoded_key = quote("Yel-bũnã/page_28.mp3")
 
 # Configuration to downloads audios
 start_url = "https://www.jw.org/mos/d-s%E1%BA%BDn-yiisi/biible/nwt/books/Yel-b%C5%A9n%C3%A3/28"
@@ -35,7 +39,7 @@ s3_prefix = "raw_data/"
 def upload_folder_to_s3(folder_path, bucket_name, s3_prefix):
     for root, dirs, files in os.walk(folder_path):
         for file in files:
-            local_path = os.path.join(root, file)
+            local_path = quote(os.path.join(root, file))
             relative_path = os.path.relpath(local_path, folder_path)
             s3_key = os.path.join(s3_prefix, relative_path)
             s3_client.upload_file(local_path, bucket_name, s3_key)
