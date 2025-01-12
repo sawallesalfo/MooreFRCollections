@@ -1,12 +1,10 @@
 import os
 import boto3
 from loguru import logger
-from urllib.parse import quote
-
-from jwsoup.audio.scraper import download_audios
 from pathlib import Path
 
-encoded_key = quote("Yel-bũnã/page_28.mp3")
+from jwsoup.audio.scraper import download_audios
+
 
 # Configuration - download audios
 start_url = "https://www.jw.org/mos/d-s%E1%BA%BDn-yiisi/biible/nwt/books/S%C9%A9ngre/1"
