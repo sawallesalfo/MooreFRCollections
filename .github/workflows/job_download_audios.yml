@@ -1,6 +1,6 @@
 name: Run job_downloads and upload files
 
-# Trigger the workflow manually
+# Trigger  workflow manually
 on:
   workflow_dispatch:
 
