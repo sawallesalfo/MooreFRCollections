@@ -94,12 +94,12 @@ def main():
         local_file_path = f"{local_download_folder}/{suffix}"
         download_file_from_s3(bucket_name, s3_key, local_file_path)
 
-        # 2. Process the file
+        # 2. Process  file
         segment_subfolder = f"{destination_folder}/{local_file_path.split("downloaded_audio/")[-1].replace('.mp3', '')}/"
         os.makedirs(os.path.dirname(segment_subfolder), exist_ok=True)
         processed_segments = process_audio_with_silence_detection(local_file_path, segment_subfolder)
 
-        # 3. Upload the processed segments
+        # 3. Upload  processed segments
         for segment_path in processed_segments[:10]:
             upload_file_to_s3(segment_path, bucket_name, segment_path)
 
