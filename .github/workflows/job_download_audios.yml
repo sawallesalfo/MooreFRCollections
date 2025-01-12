@@ -3,10 +3,10 @@ name: Scripts jobs audio downloading
 on:
   push:
     branches:
-      - main                    # Only run on push to the main branch
+      - master                    # Only run on push to the master branch
   pull_request:
     branches:
-      - main                    # Only run on pull requests to the main branch
+      - master                    # Only run on pull requests to the master branch
   #workflow_dispatch:            # Allows manual triggering of the workflow
 
 env:
