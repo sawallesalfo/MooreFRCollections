@@ -2,12 +2,18 @@ name: Build and Push Docker Image
 
 on:
   push:
+    paths:
+      - requirements.txt
+      - Dockerfile
     branches:
-      - main
+      - master
   pull_request:
+    paths:
+      - requirements.txt
+      - Dockerfile
     branches:
-      - main
-
+      - master  # Only run for pull requests targeting main
+  workflow_dispatch:  # Allows manual triggering of the workflow
 
 env:
   IMAGE_NAME: ${{ secrets.DOCKER_USERNAME }}/moorecollection
