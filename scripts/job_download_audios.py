@@ -21,7 +21,6 @@ logger.info(f"Audio files downloaded to {output_dir}")
 access_key = os.getenv('AWS_ACCESS_KEY_ID')
 secret_key = os.getenv('AWS_SECRET_ACCESS_KEY')
 endpoint_url = os.getenv('AWS_ENDPOINT_URL_S3')
-region = os.getenv('AWS_REGION')
 
 print("aaaaaaaaaaa", region)
 
@@ -30,8 +29,7 @@ s3_client = boto3.client(
     's3',
     aws_access_key_id=access_key,
     aws_secret_access_key=secret_key,
-    endpoint_url=endpoint_url,
-    region_name=region
+    endpoint_url=endpoint_url
 )
 
 bucket_name = "moore-collection"
