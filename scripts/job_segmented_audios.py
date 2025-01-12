@@ -78,7 +78,7 @@ def main():
     destination_folder = "segmented_audios"
     local_download_folder = "downloaded_audio"
 
-    files = list_s3_files(bucket_name, source_folder)
+    files = list_s3_files(bucket_name, source_folder)[137:] #start from when it failed
 
     # Process each file
     for s3_key in files:
@@ -87,22 +87,25 @@ def main():
             continue
 
         logger.info(f"Processing file: {s3_key}")
+        try:
+            # 1. Download the file
+            suffix = s3_key.split("/")[-1].replace("\\", "/")
+            local_file_path = f"{local_download_folder}/{suffix}"
+            download_file_from_s3(bucket_name, s3_key, local_file_path)
 
-        # 1. Download the file
-        suffix = s3_key.split("/")[-1].replace("\\", "/")
-        local_file_path = f"{local_download_folder}/{suffix}"
-        download_file_from_s3(bucket_name, s3_key, local_file_path)
+            # 2. Process  file
+            segment_subfolder = f"{destination_folder}/{local_file_path.split("downloaded_audio/")[-1].replace('.mp3', '')}/"
+            os.makedirs(os.path.dirname(segment_subfolder), exist_ok=True)
+            processed_segments = process_audio_with_silence_detection(local_file_path, segment_subfolder)
 
-        # 2. Process  file
-        segment_subfolder = f"{destination_folder}/{local_file_path.split("downloaded_audio/")[-1].replace('.mp3', '')}/"
-        os.makedirs(os.path.dirname(segment_subfolder), exist_ok=True)
-        processed_segments = process_audio_with_silence_detection(local_file_path, segment_subfolder)
+            # 3. Upload  processed segments
+            for segment_path in processed_segments:
+                upload_file_to_s3(segment_path, bucket_name, segment_path)
+            
+            logger.info(f"Completed processing for {s3_key}")
 
-        # 3. Upload  processed segments
-        for segment_path in processed_segments:
-            upload_file_to_s3(segment_path, bucket_name, segment_path)
-
-        logger.info(f"Completed processing for {s3_key}")
+        except:
+            logger.warning(f"processing of {s3_key} failed"")
 
 if __name__ == "__main__":
     main()
