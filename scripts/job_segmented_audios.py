@@ -99,11 +99,10 @@ def main():
         processed_segments = process_audio_with_silence_detection(local_file_path, segment_subfolder)
 
         # 3. Upload  processed segments
-        for segment_path in processed_segments[:10]:
+        for segment_path in processed_segments:
             upload_file_to_s3(segment_path, bucket_name, segment_path)
 
         logger.info(f"Completed processing for {s3_key}")
-        break
 
 if __name__ == "__main__":
     main()
