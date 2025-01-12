@@ -4,6 +4,7 @@ from loguru import logger
 from urllib.parse import quote
 
 from jwsoup.audio.scraper import download_audios
+from pathlib import Path
 
 encoded_key = quote("Yel-bũnã/page_28.mp3")
 
@@ -37,16 +38,16 @@ bucket_name = "moore-collection"
 s3_prefix = "raw_data/"
 
 def upload_folder_to_s3(folder_path, bucket_name, s3_prefix):
-    for root, dirs, files in os.walk(folder_path):
-        for file in files:
-            file = quote(quote)
-            local_path = (os.path.join(root, file))
-            relative_path = os.path.relpath(local_path, folder_path)
-            s3_key = os.path.join(s3_prefix, relative_path)
-            print("zzzzzzzzzzzz")
-            print(s3_key, relative_path, local_path)
-            s3_client.upload_file(local_path, bucket_name, s3_key)
-            logger.info(f"Uploaded {local_path} to s3://{bucket_name}/{s3_key}")
+    files  = list(Path(folder_path).glob("*.mp3"))
+    for file in files:
+        file = quote(quote)
+        local_path = (os.path.join(root, file))
+        relative_path = os.path.relpath(local_path, folder_path)
+        s3_key = os.path.join(s3_prefix, relative_path)
+        print("zzzzzzzzzzzz")
+        print(s3_key, relative_path, local_path)
+        s3_client.upload_file(local_path, bucket_name, s3_key)
+        logger.info(f"Uploaded {local_path} to s3://{bucket_name}/{s3_key}")
 
 logger.info(f"Uploading folder {output_dir} to S3...")
 upload_folder_to_s3(output_dir, bucket_name, s3_prefix)
