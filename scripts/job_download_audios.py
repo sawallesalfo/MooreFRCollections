@@ -2,13 +2,14 @@ import os
 import boto3
 from loguru import logger
 from pathlib import Path
-
 from jwsoup.audio.scraper import download_audios
+from dotenv import load_dotenv
+load_dotenv()
 
 # Configuration - download audios
 start_url = "https://www.jw.org/mos/d-s%E1%BA%BDn-yiisi/biible/nwt/books/S%C9%A9ngre/1"
 output_dir = "audio_files"
-max_file_size = 2
+max_file_size = 2 # There are 1988 pages overall
 
 logger.info("Downloading audios...")
 download_audios(start_url, output_dir, max_file_size)
