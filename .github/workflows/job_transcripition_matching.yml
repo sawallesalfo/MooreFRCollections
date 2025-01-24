@@ -1,17 +1,22 @@
-name: Scripts jobs audio downloading
+name: Scripts jobs audio transcription matching
 
 on:
   push:
     paths:
       - scripts/job_transcription_matching.py
     branches:
-      - master # Only run on push to the master branch
+      - master                    # Only run on push to the master branch
   pull_request:
     paths:
       - scripts/job_transcription_matching.py
     branches:
-      - master # Only run on pull requests to the master branch
-  workflow_dispatch: # Allows manual triggering of the workflow
+      - master                    # Only run on pull requests to the master branch
+  workflow_dispatch:              # Allows manual triggering of the workflow
+
+env:
+  IMAGE_NAME: ${{ secrets.DOCKER_USERNAME }}/moorecollection
+  IMAGE_TAG: latest
+  PYTHONPATH: ${{ github.workspace }}
 
 jobs:
   run-jobs:
@@ -21,21 +26,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Python environment
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.9' # Specify the Python version
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+      - name: Pull Docker image
+        run: docker pull ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
 
-      - name: Run Audio Download Script
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_ENDPOINT_URL_S3: ${{ secrets.AWS_ENDPOINT_URL_S3 }}
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: |
-          python scripts/job_transcription_matching.py
+    #   - name: Ensure Directory Permissions
+    #     run: docker run --rm -v ${{ github.workspace }}:/app -w /app ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} /bin/bash -c "
+    #       mkdir -p /app/scripts/audio_files && chmod 777 /app/scripts/audio_files && ls -ld /app/scripts/audio_files"
+
+      - name: Run Python script inside Docker
+        run: docker run --rm -v ${{ github.workspace }}:/app -w /app --env OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} --env AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} --env AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} --env AWS_ENDPOINT_URL_S3=${{ secrets.AWS_ENDPOINT_URL_S3 }}  ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} /bin/bash -c "python /app/scripts/job_transcription_matching.py"
