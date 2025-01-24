@@ -95,7 +95,6 @@ def process_page(
         return None
 
 
-# Main processing function
 def main(segment_path_dict, data, BUCKET_NAME, MODEL_NAME, SYSTEM_PROMPT):
     tasks = []
 
