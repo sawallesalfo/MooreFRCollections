@@ -1,0 +1,41 @@
+name: Scripts jobs audio downloading
+
+on:
+  push:
+    paths:
+      - scripts/job_transcription_matching.py
+    branches:
+      - master # Only run on push to the master branch
+  pull_request:
+    paths:
+      - scripts/job_transcription_matching.py
+    branches:
+      - master # Only run on pull requests to the master branch
+  workflow_dispatch: # Allows manual triggering of the workflow
+
+jobs:
+  run-jobs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python environment
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9' # Specify the Python version
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Audio Download Script
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_ENDPOINT_URL_S3: ${{ secrets.AWS_ENDPOINT_URL_S3 }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          python scripts/job_transcription_matching.py
