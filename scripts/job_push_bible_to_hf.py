@@ -5,6 +5,7 @@ from datasets import Dataset
 
 from jwsoup.text.utils import clean_text
 
+
 def list_parquet_files(directory):
     """
     List all Parquet files in a directory recursively.
@@ -12,8 +13,10 @@ def list_parquet_files(directory):
     return [
         os.path.join(root, file)
         for root, _, files in os.walk(directory)
-        for file in files if file.endswith(".parquet")
+        for file in files
+        if file.endswith(".parquet")
     ]
+
 
 def read_parquet_files(parquet_files):
     """
@@ -39,6 +42,7 @@ def read_parquet_files(parquet_files):
         print("No valid Parquet files found.")
         return None
 
+
 def process_dataset(directory, prefix):
     """
     Process a dataset by listing, reading, and cleaning Parquet files.
@@ -59,6 +63,7 @@ def process_dataset(directory, prefix):
     else:
         return pd.DataFrame()
 
+
 def merge_datasets(df1, df2, key1, key2):
     """
     Merge two datasets on specified keys and clean up the columns.
@@ -74,12 +79,13 @@ def merge_datasets(df1, df2, key1, key2):
     """
     merged_df = (
         df1.merge(df2, left_on=key1, right_on=key2, how="inner")
-           .drop_duplicates()
-           .reset_index(drop=True)
-           .rename(columns={key1: "verse_id"})
-           .drop(columns=[key2])
+        .drop_duplicates()
+        .reset_index(drop=True)
+        .rename(columns={key1: "verse_id"})
+        .drop(columns=[key2])
     )
     return merged_df
+
 
 # Process  Moore dataset
 directory_moore = "datasets/bible_data_moore.parquet/"
@@ -90,8 +96,13 @@ directory_french = "datasets/bible_data_francais.parquet/"
 french_dataset = process_dataset(directory_french, "french_")
 
 # Merge
-datasets = merge_datasets(moore_dataset, french_dataset, "moore_verse_id", "french_verse_id")
+datasets = merge_datasets(
+    moore_dataset, french_dataset, "moore_verse_id", "french_verse_id"
+)
 
 # push to huginface
 datasets_hf = Dataset.from_pandas(datasets)
-datasets_hf.push_to_hub("MooreFRCollections_BibleOnlyText", commit_message=f"🚀 add moore with transcripts + metadata")
+datasets_hf.push_to_hub(
+    "MooreFRCollections_BibleOnlyText",
+    commit_message=f"🚀 add moore with transcripts + metadata",
+)

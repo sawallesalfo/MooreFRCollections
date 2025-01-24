@@ -1,7 +1,6 @@
 **__pycache__**
 **.pyc**
-**/env/**
-**/.venv/**
+**/*env/**
 **/*.egg-info
 **/*parquet
 build/
