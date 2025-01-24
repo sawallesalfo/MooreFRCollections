@@ -19,7 +19,6 @@ from shelpers.global_vars import (
     BATCH_SIZE,
 )
 
-
 from dotenv import load_dotenv
 
 load_dotenv("vars.env")
