@@ -58,7 +58,7 @@ segment_path_dict = {
 logger.info("Segments and paths are ready.")
 
 
-# Processing a single page
+# Processing a single page 
 def process_page(
     page_num, tmp, files, BUCKET_NAME, MODEL_NAME, SYSTEM_PROMPT, BATCH_SIZE
 ):
@@ -75,7 +75,7 @@ def process_page(
         )
         openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-        # Process the page
+        # Process  page
         result = process_single_page(
             page_num,
             tmp_page,
