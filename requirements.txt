@@ -3,3 +3,5 @@ loguru
 jwsoup
 python-dotenv
 pydub
+openai
+rapidfuzz
