@@ -26,8 +26,9 @@ def audio_to_base64(audio_file_path):
     with open(audio_file_path, "rb") as audio_file:
         binary_content = audio_file.read()
         base64_encoded = base64.b64encode(binary_content)
-        os.remove(audio_file_path)
-        return base64_encoded.decode("utf-8")
+        audio_base64 = base64_encoded.decode("utf-8")
+    os.remove(audio_file_path)
+    return audio_base64
 
 
 def save_results(data, file_path):
@@ -104,7 +105,7 @@ def process_single_page(
     BUCKET_NAME,
     MODEL_NAME,
     SYSTEM_PROMPT,
-    BATCH_SIZE=20,
+    BATCH_SIZE=50,
 ):
     """
     Process a single page for audio transcription and grading.
@@ -132,10 +133,9 @@ def process_single_page(
     verses = inputs.copy()
     _transcription = ""
 
-    for idx, file in list(enumerate(page_files, 1))[:1]:
+    for idx, file in enumerate(page_files, 1):
         download_file_from_s3(s3_client, BUCKET_NAME, file, file)
         audio_base64 = audio_to_base64(file)
-        print(f"Processing audio {file}")
 
         # Use the first 10 verses as input.
         elligible_candidates = verses[:10]

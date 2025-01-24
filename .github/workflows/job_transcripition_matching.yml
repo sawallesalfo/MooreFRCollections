@@ -1,15 +1,15 @@
 name: Scripts jobs audio transcription matching
 
 on:
-  push:
-    paths:
-      - scripts/job_transcription_matching.py
-    branches:
-      - master                    # Only run on push to the master branch
-  pull_request:
-    paths:
-      - scripts/job_transcription_matching.py
-    branches:
+  # push:
+  #   paths:
+  #     - scripts/job_transcription_matching.py
+  #   branches:
+  #     - master                    # Only run on push to the master branch
+  # pull_request:
+  #   paths:
+  #     - scripts/job_transcription_matching.py
+  #   branches:
       - master                    # Only run on pull requests to the master branch
   workflow_dispatch:              # Allows manual triggering of the workflow
 
