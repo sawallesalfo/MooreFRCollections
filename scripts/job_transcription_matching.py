@@ -23,14 +23,14 @@ from dotenv import load_dotenv
 
 load_dotenv("vars.env")
 
-# Load dataset and process columns
+# Load dataset and proces
 DATA_FILE = "sawadogosalif/MooreFRCollections_BibleOnlyText"
 data = load_dataset(DATA_FILE, split="train").to_pandas()
 data[["chapter", "page"]] = data["moore_source_url"].apply(
     lambda x: pd.Series(extract_audio_identifier(x))
 )
 
-# AWS S3 configuration
+# Clinets configuration
 access_key = os.getenv("AWS_ACCESS_KEY_ID")
 secret_key = os.getenv("AWS_SECRET_ACCESS_KEY")
 endpoint_url = os.getenv("AWS_ENDPOINT_URL_S3")
@@ -42,7 +42,6 @@ s3_client = boto3.client(
     endpoint_url=endpoint_url,
 )
 
-# OpenAI API initialization
 openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 # Collecting paths
