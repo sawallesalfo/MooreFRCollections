@@ -6,3 +6,4 @@ pydub
 openai
 rapidfuzz
 joblib
+datasets
