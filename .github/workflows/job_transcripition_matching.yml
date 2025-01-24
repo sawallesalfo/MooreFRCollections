@@ -37,6 +37,4 @@ jobs:
           mkdir -p /app/scripts/segmented_audios && chmod 777 /app/scripts/segmented_audios && ls -ld /app/scripts/segmented_audios"
 
       - name: Run Python script inside Docker
-        run: docker run --rm -v ${{ github.workspace }}:/app -w /app --env OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} --env AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} --env AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} --env AWS_ENDPOINT_URL_S3=${{ secrets.AWS_ENDPOINT_URL_S3 }}  ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} /bin/bash -c "python /app/scripts/job_transcription_matching.py"- name: Test S3 Upload
-  run: |
-    aws s3 cp test.json s3://moore-collection/
+        run: docker run --rm -v ${{ github.workspace }}:/app -w /app --env OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} --env AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} --env AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} --env AWS_ENDPOINT_URL_S3=${{ secrets.AWS_ENDPOINT_URL_S3 }}  ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} /bin/bash -c "python /app/scripts/job_transcription_matching.py"

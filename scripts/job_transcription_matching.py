@@ -75,7 +75,7 @@ def process_page(
         )
         openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-        # Process  page
+        # Process page
         result = process_single_page(
             page_num,
             tmp_page,
