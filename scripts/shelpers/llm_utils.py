@@ -23,9 +23,10 @@ def remove_similar_elements(input_list, elements_to_remove, threshold=85):
 
 def audio_to_base64(audio_file_path):
 
-    with open(audio_file_path, "rb") as mp3_file:
-        binary_content = mp3_file.read()
+    with open(audio_file_path, "rb") as audio_file:
+        binary_content = audio_file.read()
         base64_encoded = base64.b64encode(binary_content)
+        os.remove(audio_file_path)
         return base64_encoded.decode("utf-8")
 
 
@@ -131,7 +132,7 @@ def process_single_page(
     verses = inputs.copy()
     _transcription = ""
 
-    for idx, file in list(enumerate(page_files, 1))[:2]:
+    for idx, file in list(enumerate(page_files, 1))[:1]:
         download_file_from_s3(s3_client, BUCKET_NAME, file, file)
         audio_base64 = audio_to_base64(file)
         print(f"Processing audio {file}")

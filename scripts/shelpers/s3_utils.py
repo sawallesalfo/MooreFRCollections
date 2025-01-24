@@ -4,6 +4,7 @@ from loguru import logger
 
 def upload_file_to_s3(s3_client, local_path, bucket_name, s3_key):
     """Upload a single file to S3."""
+    logger.info(f" est ce que le fichier exist {os.path.exists(local_path)}")
     s3_client.upload_file(local_path, bucket_name, s3_key)
     logger.info(f"Uploaded {local_path} to s3://{bucket_name}/{s3_key}")
 
