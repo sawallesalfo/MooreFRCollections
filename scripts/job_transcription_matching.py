@@ -99,7 +99,6 @@ def process_page(
 def main(segment_path_dict, data, BUCKET_NAME, MODEL_NAME, SYSTEM_PROMPT):
     tasks = []
 
-    # Select only a subset of segments for testing
     segment_paths = list(segment_path_dict.items())[:2]
 
     for chapter, files in segment_paths:
