@@ -2,7 +2,7 @@ import re
 import base64
 import json
 from loguru import logger
-
+import os
 from .s3_utils import download_file_from_s3, upload_file_to_s3
 from .data_parser import splitter, flatten_nested_values
 from .path_collectors import get_page_segments
