@@ -32,7 +32,7 @@ def download_file_from_s3(bucket_name, s3_key, local_path):
 
 
 def process_audio_with_silence_detection(
-    file_path, segment_folder, min_silence_len=500, silence_thresh=-40
+    file_path, segment_folder, min_silence_len=400, silence_thresh=-35
 ):
     """
     Process an audio file to split it into segments based on detected silences.
@@ -85,7 +85,7 @@ def main():
     # Configuration
     bucket_name = "moore-collection"
     source_folder = "raw_data"
-    destination_folder = "segmented_audios"
+    destination_folder = "fasoai-segmented_audios"
     local_download_folder = "downloaded_audio"
 
     files = list_s3_files(bucket_name, source_folder)[137:]  # start from when it failed
