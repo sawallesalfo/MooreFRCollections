@@ -7,3 +7,4 @@ openai
 rapidfuzz
 joblib
 datasets
+s3fs
