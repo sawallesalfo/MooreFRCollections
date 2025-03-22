@@ -8,3 +8,4 @@ rapidfuzz
 joblib
 datasets
 s3fs
+openpyxl
