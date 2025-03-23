@@ -84,11 +84,11 @@ def main():
 
     # Configuration
     bucket_name = "moore-collection"
-    source_folder = "raw_data"
+    source_folder = "raw_data/yikri"
     destination_folder = "fasoai-segmented_audios"
     local_download_folder = "downloaded_audio"
 
-    files = list_s3_files(bucket_name, source_folder)[137:]  # start from when it failed
+    files = list_s3_files(bucket_name, source_folder)#[137:]  # start from when it failed
 
     # Process each file
     for s3_key in files:
