@@ -18,7 +18,7 @@ from datasets import load_dataset
 from loguru import logger 
 from dotenv import load_dotenv
 from openai import OpenAI
-
+from datasets import Dataset
 def translate_to_west_african_french(query):
     """Translates English text to Western African French using OpenAI's GPT mode """
     
