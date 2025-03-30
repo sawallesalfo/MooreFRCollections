@@ -43,7 +43,6 @@ def process_dataset(current_dataset_path, incoming_dataset_path, output_dataset_
     logger.info(f"Nombre de lignes - Dataset actuel: {len(current_dataset)}, Dataset entrant: {len(incoming_dataset)}")
     
     final_dataset = concatenate_datasets([current_dataset, incoming_dataset])
-    
     logger.info("Fusion des datasets réussie ✅")
     
     logger.info(f"Push du dataset final sur {output_dataset_path}...")
