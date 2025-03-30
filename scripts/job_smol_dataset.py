@@ -23,7 +23,7 @@ def translate_to_west_african_french(query):
     """Translates English text to Western African French using OpenAI's GPT mode """
     
   
-    client = OpenAI(api_key=os.environ["API_KEY"])
+    client = OpenAI()
     
     system_prompt = """Tu es un traducteur de texte en anglas en français d'afrique occidentale.
     Tu dois juste donner la traduction. La réponse doit être entre la balise <text>.
@@ -122,5 +122,5 @@ def main():
     logger.info(f"Dataset SMOL sauvegardé localement dans")
     return combined_df
 
-# if __name__ == "__main__":
+if __name__ == "__main__":
   _ = main()
