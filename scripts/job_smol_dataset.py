@@ -87,7 +87,7 @@ def process_smoldoc():
 def main():
 
     BUCKET_NAME = "moore-collection"
-    OUTPUT_PATH = f"BurkimbIA/datasets/SMOL"
+    OUTPUT_PATH = f"moore-collection/hf_datasets/SMOL"
     
     access_key = os.getenv("AWS_ACCESS_KEY_ID")
     secret_key = os.getenv("AWS_SECRET_ACCESS_KEY")
