@@ -114,7 +114,7 @@ def main():
     combined_df = pd.concat([gatitos_df, smolsent_df, smoldoc_df]).assign(source="google/smol").head(10)
     combined_df["french"] = combined_df["src"].apply(translate_to_west_african_french)
 
-    dataset = Dataset.from_pandas(x).remove_columns("__index_level_0__")
+    dataset = Dataset.from_pandas(combined_df).remove_columns("__index_level_0__")
     dataset.save_to_disk(f"s3://{BUCKET_NAME}/{OUTPUT_PATH}",
     storage_options={"key": access_key, "secret": secret_key, "client_kwargs":{"endpoint_url":endpoint_url}},
     )
