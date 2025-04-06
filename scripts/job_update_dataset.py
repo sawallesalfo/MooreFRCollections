@@ -54,8 +54,8 @@ if __name__ == "__main__":
     
     ########################## Change me ######################################
     CURRENT_DATASET_PATH = "sawadogosalif/MooreFRCollections"
-    COMMIT_MESSAGE = "🚀 Add SMOL dataset"
-    INCOMING_DATASET_PATH = f"s3://{BUCKET_NAME}/hf_datasets/SMOL"
+    COMMIT_MESSAGE = "🚀 Add masakhane dataset"
+    INCOMING_DATASET_PATH = f"s3://{BUCKET_NAME}/hf_datasets/masakhane_fr_mos"
     OUTPUT_DATASET_PATH = CURRENT_DATASET_PATH
     ############################################################################
     
