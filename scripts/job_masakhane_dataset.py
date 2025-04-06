@@ -6,7 +6,6 @@ from datasets import Dataset
 import boto3
 from loguru import logger
 
-
 def download_json_file(github_raw_url, local_file_path):
     """Downloads a JSON file from a GitHub raw URL."""
     try:
