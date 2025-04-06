@@ -44,6 +44,10 @@ Le corpus a été construit à partir de :
 - On en cherche toujours :)
 3. **Declarations des droits humains**
   - [version française ici](https://www.ohchr.org/sites/default/files/UDHR/Documents/UDHR_Translations/frn.pdf)et [version mooore](https://www.ohchr.org/sites/default/files/UDHR/Documents/UDHR_Translations/mhm.pdf)
+ 
+4. Smol dataset : https://huggingface.co/datasets/google/smo
+
+5. Masakhane dataset: https://github.com/masakhane-io/lafand-mt/blob/main/data/json_files/
   
 
 Pour le moment, **les données sont exclusivement textuelles**, mais elles sont soigneusement nettoyées et formatées pour les rendre compatibles avec les outils modernes d’apprentissage automatique.
