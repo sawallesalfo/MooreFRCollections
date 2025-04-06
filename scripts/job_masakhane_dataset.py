@@ -1,3 +1,10 @@
+"""
+Data from Masakhane
+https://github.com/masakhane-io/lafand-mt/blob/main/data/json_files/fr-mos/train.json
+
+Let's put Africa on the NLP map
+""""
+
 import os
 import requests
 import json
