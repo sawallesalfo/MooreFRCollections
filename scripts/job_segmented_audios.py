@@ -83,7 +83,7 @@ def main():
 
     # Configuration
     bucket_name = "moore-collection"
-    source_folder = "raw_data/ooze"
+    source_folder = "raw_data/Ebre-rãmbã"
     destination_folder = "fasoai-segmented_audios"
     local_download_folder = "downloaded_audio"
 
