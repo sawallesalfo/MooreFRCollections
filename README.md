@@ -39,7 +39,7 @@ configs:
 Le corpus a été construit à partir de :
 1. **Textes bibliques de JW.ORG** : Contenus collectés (https://www.jw.org//) à l'aide de l’outil [jwsoup](https://pypi.org/project/jwsoup/) pour une extraction efficace des données textuelles.
 2. **Dictionnaires bilingues** : 
-- Urs Niggli (édition janvier 2017),  Pour l'extraction, j'utilise cette méthode que vous trouvez dans l'article ci-après :[blog](https://sawadogosalif.github.io/blog/2024/11/24/adieu-ocr-place-aux-llm-multimodaux-pour-lextraction-des-informations-dans-les-documents/)
+- Urs Niggli (édition janvier 2017),  Pour l'extraction, j'utilise cette méthode que vous trouvez dans l'article ci-après :[blog](https://sawallesalfo.github.io/blog/2024/11/24/adieu-ocr-place-aux-llm-multimodaux-pour-lextraction-des-informations-dans-les-documents/)
 - Dictionnaire de montivilliersnassere disponible  [ici](https://www.montivilliersnassere.fr/actusnasre.html).
 - On en cherche toujours :)
 3. **Declarations des droits humains**
